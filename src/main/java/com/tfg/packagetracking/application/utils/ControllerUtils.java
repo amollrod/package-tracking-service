@@ -5,8 +5,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
-import java.util.function.Function;
-
 /**
  * Utility class for controller-related functions.
  */
@@ -26,20 +24,17 @@ public class ControllerUtils {
     }
 
     /**
-     * Creates a paged response from a Page of domain objects.
-     * Adds the X-Total-Pages and X-Total-Elements headers to the response.
+     * Creates a paged response from a Page of objects. Adds the X-Total-Pages and X-Total-Elements
+     * headers to the response.
      *
-     * @param page Page of domain objects
-     * @param converter Function to convert domain objects to response DTOs
-     * @param <D> Domain object type
+     * @param page Page of objects
      * @param <R> Response object type
      * @return ResponseEntity with pagination headers
      */
-    public static <D, R> ResponseEntity<Page<R>> createPagedResponse(Page<D> page, Function<D, R> converter) {
-        Page<R> convertedPage = page.map(converter);
+    public static <R> ResponseEntity<Page<R>> createPagedResponse(Page<R> page) {
         return ResponseEntity.ok()
-                .header("X-Total-Pages", String.valueOf(convertedPage.getTotalPages()))
-                .header("X-Total-Elements", String.valueOf(convertedPage.getTotalElements()))
-                .body(convertedPage);
+                .header("X-Total-Pages", String.valueOf(page.getTotalPages()))
+                .header("X-Total-Elements", String.valueOf(page.getTotalElements()))
+                .body(page);
     }
 }

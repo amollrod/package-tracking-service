@@ -47,7 +47,7 @@ public class PackageController {
         Pageable pageable = ControllerUtils.createPageable(page, size);
         Page<PackageResponse> packages = packageService.findPackages(status, destination, currentLocation, fromDate, toDate, pageable);
 
-        return ControllerUtils.createPagedResponse(packages, p -> p);
+        return ControllerUtils.createPagedResponse(packages);
     }
 
     @PatchMapping("/{id}/status")

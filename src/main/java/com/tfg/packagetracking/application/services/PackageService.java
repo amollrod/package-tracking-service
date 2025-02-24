@@ -27,8 +27,9 @@ public class PackageService {
     }
 
     public Page<PackageResponse> findPackages(PackageStatus status, String destination, String currentLocation, Instant fromDate, Instant toDate, Pageable pageable) {
-        return domainService.findByFilters(status, destination, currentLocation, fromDate, toDate, pageable)
-                .map(PackageMapper::toResponse);
+        return PackageMapper.toResponsePage(
+                domainService.findByFilters(status, destination, currentLocation, fromDate, toDate, pageable)
+        );
     }
 
     public PackageResponse createPackage(CreatePackageRequest request) {
