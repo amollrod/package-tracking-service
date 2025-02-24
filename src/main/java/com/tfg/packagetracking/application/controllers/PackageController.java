@@ -5,6 +5,7 @@ import com.tfg.packagetracking.application.dto.PackageResponse;
 import com.tfg.packagetracking.application.services.PackageService;
 import com.tfg.packagetracking.application.utils.ControllerUtils;
 import com.tfg.packagetracking.domain.models.PackageStatus;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -23,7 +24,7 @@ public class PackageController {
     }
 
     @PostMapping
-    public ResponseEntity<PackageResponse> createPackage(@RequestBody CreatePackageRequest request) {
+    public ResponseEntity<PackageResponse> createPackage(@RequestBody @Valid CreatePackageRequest request) {
         return ResponseEntity.ok(packageService.createPackage(request));
     }
 

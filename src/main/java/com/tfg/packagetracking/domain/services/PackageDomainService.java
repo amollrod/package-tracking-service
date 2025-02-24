@@ -1,6 +1,7 @@
 package com.tfg.packagetracking.domain.services;
 
 import com.tfg.packagetracking.application.ports.PackageRepositoryPort;
+import com.tfg.packagetracking.domain.exceptions.PackageNotFoundException;
 import com.tfg.packagetracking.domain.models.Package;
 import com.tfg.packagetracking.domain.models.PackageStatus;
 import org.springframework.data.domain.Page;
@@ -27,23 +28,16 @@ public class PackageDomainService {
     }
 
     public Package createPackage(String origin, String destination) {
-        Package newPackage = Package.builder()
-                .origin(origin)
-                .destination(destination)
-                .status(PackageStatus.CREATED)
-                .timestamp(Instant.now())
-                .currentLocation(origin)
-                .build();
+        Package newPackage = Package.create(origin, destination);
         repository.save(newPackage);
         return newPackage;
     }
 
     public Package updatePackageStatus(String id, PackageStatus status, String newLocation) {
-        Optional<Package> packageOpt = repository.findById(id);
-        if (packageOpt.isEmpty()) {
-            throw new RuntimeException("Package with ID " + id + " not found.");
-        }
-        Package updatedPackage = packageOpt.get().updateStatus(status, newLocation);
+        Package packageEntity = repository.findById(id)
+                .orElseThrow(() -> new PackageNotFoundException(id));
+
+        Package updatedPackage = packageEntity.updateStatus(status, newLocation);
         repository.save(updatedPackage);
         return updatedPackage;
     }
