@@ -1,5 +1,6 @@
 package com.tfg.packagetracking.domain.services;
 
+import com.tfg.packagetracking.application.ports.PackageEventPublisherPort;
 import com.tfg.packagetracking.application.ports.PackageRepositoryPort;
 import com.tfg.packagetracking.domain.exceptions.PackageNotFoundException;
 import com.tfg.packagetracking.domain.models.Package;
@@ -14,9 +15,11 @@ import java.util.Optional;
 @Service
 public class PackageDomainService {
     private final PackageRepositoryPort repository;
+    private final PackageEventPublisherPort eventPublisher;
 
-    public PackageDomainService(PackageRepositoryPort repository) {
+    public PackageDomainService(PackageRepositoryPort repository, PackageEventPublisherPort eventPublisher) {
         this.repository = repository;
+        this.eventPublisher = eventPublisher;
     }
 
     public Optional<Package> getPackageById(String id) {
@@ -34,11 +37,13 @@ public class PackageDomainService {
     }
 
     public Package updatePackageStatus(String id, PackageStatus status, String newLocation) {
-        Package packageEntity = repository.findById(id)
-                .orElseThrow(() -> new PackageNotFoundException(id));
+        Package updatedPackage = repository.findById(id)
+                .orElseThrow(() -> new PackageNotFoundException(id))
+                .updateStatus(status, newLocation);
 
-        Package updatedPackage = packageEntity.updateStatus(status, newLocation);
         repository.save(updatedPackage);
+        eventPublisher.publishPackageUpdatedEvent(updatedPackage);
+
         return updatedPackage;
     }
 }
