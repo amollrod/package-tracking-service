@@ -6,5 +6,6 @@ public enum PackageStatus {
     IN_STORE,
     DELIVERED,
     RETURNED,
-    CANCELED
+    CANCELED,
+    LOST
 }

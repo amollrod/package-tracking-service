@@ -1,8 +1,10 @@
 package com.tfg.packagetracking.application.services;
 
 import com.tfg.packagetracking.application.dto.CreatePackageRequest;
+import com.tfg.packagetracking.application.dto.PackageHistoryResponse;
 import com.tfg.packagetracking.application.dto.PackageResponse;
 import com.tfg.packagetracking.application.mappers.PackageMapper;
+import com.tfg.packagetracking.domain.exceptions.PackageNotFoundException;
 import com.tfg.packagetracking.domain.models.Package;
 import com.tfg.packagetracking.domain.models.PackageStatus;
 import com.tfg.packagetracking.domain.services.PackageDomainService;
@@ -11,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,9 +29,13 @@ public class PackageService {
                 .map(PackageMapper::toResponse);
     }
 
-    public Page<PackageResponse> findPackages(PackageStatus status, String destination, String currentLocation, Instant fromDate, Instant toDate, Pageable pageable) {
+    public List<PackageHistoryResponse> getPackageHistory(String id) {
+        return PackageMapper.toHistoryResponse(domainService.getPackageHistory(id));
+    }
+
+    public Page<PackageResponse> findPackages(PackageStatus status, String origin, String destination, String location, Instant fromDate, Instant toDate, Pageable pageable) {
         return PackageMapper.toResponsePage(
-                domainService.findByFilters(status, destination, currentLocation, fromDate, toDate, pageable)
+                domainService.findByFilters(status, origin, destination, location, fromDate, toDate, pageable)
         );
     }
 

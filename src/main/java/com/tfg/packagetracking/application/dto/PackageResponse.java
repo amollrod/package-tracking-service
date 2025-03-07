@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -17,6 +17,7 @@ public class PackageResponse {
     private String origin;
     private String destination;
     private PackageStatus status;
-    private String currentLocation;
-    private Instant timestamp;
+    private String lastLocation;
+    private long lastTimestamp;
+    private List<PackageHistoryResponse> history;
 }

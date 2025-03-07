@@ -31,23 +31,26 @@ public class PackageRepositoryAdapter implements PackageRepositoryPort {
     }
 
     @Override
-    public Page<Package> findByFilters(PackageStatus status, String destination, String currentLocation, Instant fromDate, Instant toDate, Pageable pageable) {
+    public Page<Package> findByFilters(PackageStatus status, String origin, String destination, String location, Instant fromDate, Instant toDate, Pageable pageable) {
         Query query = new Query();
 
         if (status != null) {
             query.addCriteria(Criteria.where("status").is(status));
         }
+        if (origin != null) {
+            query.addCriteria(Criteria.where("origin").regex(origin, "i"));
+        }
         if (destination != null) {
             query.addCriteria(Criteria.where("destination").regex(destination, "i"));
         }
-        if (currentLocation != null) {
-            query.addCriteria(Criteria.where("currentLocation").regex(currentLocation, "i"));
+        if (location != null) {
+            query.addCriteria(Criteria.where("history.location").regex(location, "i"));
         }
         if (fromDate != null) {
-            query.addCriteria(Criteria.where("timestamp").gte(fromDate));
+            query.addCriteria(Criteria.where("history.timestamp").gte(fromDate));
         }
         if (toDate != null) {
-            query.addCriteria(Criteria.where("timestamp").lte(toDate));
+            query.addCriteria(Criteria.where("history.timestamp").lte(toDate));
         }
 
         query.with(pageable);

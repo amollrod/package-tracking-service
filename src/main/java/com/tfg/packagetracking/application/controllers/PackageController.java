@@ -1,6 +1,7 @@
 package com.tfg.packagetracking.application.controllers;
 
 import com.tfg.packagetracking.application.dto.CreatePackageRequest;
+import com.tfg.packagetracking.application.dto.PackageHistoryResponse;
 import com.tfg.packagetracking.application.dto.PackageResponse;
 import com.tfg.packagetracking.application.services.PackageService;
 import com.tfg.packagetracking.application.utils.ControllerUtils;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -35,18 +37,25 @@ public class PackageController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @GetMapping("/{id}/history")
+    public ResponseEntity<List<PackageHistoryResponse>> getPackageHistory(@PathVariable String id) {
+        List<PackageHistoryResponse> history = packageService.getPackageHistory(id);
+        return ResponseEntity.ok(history);
+    }
+
     @GetMapping("/search")
     public ResponseEntity<Page<PackageResponse>> searchPackages(
             @RequestParam(required = false) PackageStatus status,
+            @RequestParam(required = false) String origin,
             @RequestParam(required = false) String destination,
-            @RequestParam(required = false) String currentLocation,
+            @RequestParam(required = false) String location,
             @RequestParam(required = false) Instant fromDate,
             @RequestParam(required = false) Instant toDate,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
 
         Pageable pageable = ControllerUtils.createPageable(page, size);
-        Page<PackageResponse> packages = packageService.findPackages(status, destination, currentLocation, fromDate, toDate, pageable);
+        Page<PackageResponse> packages = packageService.findPackages(status, origin, destination, location, fromDate, toDate, pageable);
 
         return ControllerUtils.createPagedResponse(packages);
     }
