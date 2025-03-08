@@ -19,12 +19,12 @@ import java.util.Optional;
 public class PackageDomainService {
     private final PackageRepositoryPort repository;
     private final PackageEventPublisherPort eventPublisher;
-    private final BlockchainServicePort blockchainServicePort;
+    private final BlockchainServicePort blockchainService;
 
     public PackageDomainService(PackageRepositoryPort repository, PackageEventPublisherPort eventPublisher, BlockchainServicePort blockchainServicePort) {
         this.repository = repository;
         this.eventPublisher = eventPublisher;
-        this.blockchainServicePort = blockchainServicePort;
+        this.blockchainService = blockchainServicePort;
     }
 
     public Optional<Package> getPackageById(String id) {
@@ -36,16 +36,19 @@ public class PackageDomainService {
 //         if (repository.findById(id).isEmpty()) {
 //            throw new PackageNotFoundException(id);
 //         }
-        return blockchainServicePort.getPackageHistory(id);
+        return blockchainService.getPackageHistory(id);
     }
 
-    public Page<Package> findByFilters(PackageStatus status, String origin, String destination, String location, Instant fromDate, Instant toDate,  Pageable pageable) {
+    public Page<Package> findByFilters(PackageStatus status, String origin, String destination, String location, Instant fromDate, Instant toDate, Pageable pageable) {
         return repository.findByFilters(status, origin, destination, location, fromDate, toDate, pageable);
     }
 
     public Package createPackage(String origin, String destination) {
         Package newPackage = Package.create(origin, destination);
+
         repository.save(newPackage);
+        eventPublisher.publishPackageCreatedEvent(newPackage);
+
         return newPackage;
     }
 

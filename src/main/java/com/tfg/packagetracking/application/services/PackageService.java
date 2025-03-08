@@ -4,7 +4,6 @@ import com.tfg.packagetracking.application.dto.CreatePackageRequest;
 import com.tfg.packagetracking.application.dto.PackageHistoryResponse;
 import com.tfg.packagetracking.application.dto.PackageResponse;
 import com.tfg.packagetracking.application.mappers.PackageMapper;
-import com.tfg.packagetracking.domain.exceptions.PackageNotFoundException;
 import com.tfg.packagetracking.domain.models.Package;
 import com.tfg.packagetracking.domain.models.PackageStatus;
 import com.tfg.packagetracking.domain.services.PackageDomainService;
