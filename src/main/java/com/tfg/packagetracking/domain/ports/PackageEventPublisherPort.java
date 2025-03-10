@@ -1,4 +1,4 @@
-package com.tfg.packagetracking.application.ports;
+package com.tfg.packagetracking.domain.ports;
 
 import com.tfg.packagetracking.domain.models.Package;
 

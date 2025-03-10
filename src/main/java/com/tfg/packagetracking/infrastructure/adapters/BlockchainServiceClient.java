@@ -1,6 +1,6 @@
 package com.tfg.packagetracking.infrastructure.adapters;
 
-import com.tfg.packagetracking.application.ports.BlockchainServicePort;
+import com.tfg.packagetracking.domain.ports.BlockchainServicePort;
 import com.tfg.packagetracking.domain.models.PackageHistoryEvent;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

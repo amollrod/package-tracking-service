@@ -1,8 +1,8 @@
 package com.tfg.packagetracking.domain.services;
 
-import com.tfg.packagetracking.application.ports.BlockchainServicePort;
-import com.tfg.packagetracking.application.ports.PackageEventPublisherPort;
-import com.tfg.packagetracking.application.ports.PackageRepositoryPort;
+import com.tfg.packagetracking.domain.ports.BlockchainServicePort;
+import com.tfg.packagetracking.domain.ports.PackageEventPublisherPort;
+import com.tfg.packagetracking.domain.ports.PackageRepositoryPort;
 import com.tfg.packagetracking.domain.exceptions.PackageNotFoundException;
 import com.tfg.packagetracking.domain.models.Package;
 import com.tfg.packagetracking.domain.models.PackageHistoryEvent;

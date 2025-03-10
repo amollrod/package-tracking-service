@@ -1,6 +1,6 @@
 package com.tfg.packagetracking.infrastructure.adapters;
 
-import com.tfg.packagetracking.application.ports.PackageEventPublisherPort;
+import com.tfg.packagetracking.domain.ports.PackageEventPublisherPort;
 import com.tfg.packagetracking.application.mappers.PackageMapper;
 import com.tfg.packagetracking.domain.models.Package;
 import org.springframework.kafka.core.KafkaTemplate;

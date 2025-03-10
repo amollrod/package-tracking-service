@@ -1,6 +1,6 @@
 package com.tfg.packagetracking.infrastructure.adapters;
 
-import com.tfg.packagetracking.application.ports.PackageRepositoryPort;
+import com.tfg.packagetracking.domain.ports.PackageRepositoryPort;
 import com.tfg.packagetracking.domain.models.Package;
 import com.tfg.packagetracking.domain.models.PackageStatus;
 import com.tfg.packagetracking.infrastructure.repositories.MongoPackageRepository;
