@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 public class PackageResponse {
-    private String id;
+    private long id;
     private String origin;
     private String destination;
     private PackageStatus status;

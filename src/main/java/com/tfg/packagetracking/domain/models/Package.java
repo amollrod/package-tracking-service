@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -20,7 +21,7 @@ import java.util.Optional;
 @Document(collection = "packages")
 public class Package {
     @Id
-    private String id;
+    private long id;
     private String origin;
     private String destination;
     private PackageStatus status;
@@ -38,6 +39,7 @@ public class Package {
      * @return the created package
      */
     public static Package create(String origin, String destination) {
+        long generatedId = UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE;
         PackageStatus initialStatus = PackageStatus.CREATED;
         List<PackageHistoryEvent> initialHistory = List.of(
                 PackageHistoryEvent.builder()
@@ -47,6 +49,7 @@ public class Package {
                         .build()
         );
         return Package.builder()
+                .id(generatedId)
                 .origin(origin)
                 .destination(destination)
                 .status(initialStatus)

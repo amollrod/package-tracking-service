@@ -26,7 +26,7 @@ public class PackageRepositoryAdapter implements PackageRepositoryPort {
     }
 
     @Override
-    public Optional<Package> findById(String id) {
+    public Optional<Package> findById(long id) {
         return repository.findById(id);
     }
 

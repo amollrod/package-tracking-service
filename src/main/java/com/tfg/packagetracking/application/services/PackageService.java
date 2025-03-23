@@ -23,12 +23,12 @@ public class PackageService {
         this.domainService = domainService;
     }
 
-    public Optional<PackageResponse> findPackage(String id) {
+    public Optional<PackageResponse> findPackage(long id) {
         return domainService.getPackageById(id)
                 .map(PackageMapper::toResponse);
     }
 
-    public List<PackageHistoryResponse> getPackageHistory(String id) {
+    public List<PackageHistoryResponse> getPackageHistory(long id) {
         return PackageMapper.toHistoryResponse(domainService.getPackageHistory(id));
     }
 
@@ -46,7 +46,7 @@ public class PackageService {
         return PackageMapper.toResponse(createdPackage);
     }
 
-    public PackageResponse updatePackageStatus(String id, PackageStatus status, String newLocation) {
+    public PackageResponse updatePackageStatus(long id, PackageStatus status, String newLocation) {
         Package updatedPackage = domainService.updatePackageStatus(id, status, newLocation);
         return PackageMapper.toResponse(updatedPackage);
     }

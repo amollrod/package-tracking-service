@@ -25,7 +25,7 @@ public class BlockchainServiceClient implements BlockchainServicePort {
     }
 
     @Override
-    public List<PackageHistoryEvent> getPackageHistory(String packageId) {
+    public List<PackageHistoryEvent> getPackageHistory(long packageId) {
         String url = String.format("%s/package/%s/history", blockchainServiceUrl, packageId);
 
         try {
