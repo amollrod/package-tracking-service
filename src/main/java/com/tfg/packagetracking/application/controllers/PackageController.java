@@ -31,14 +31,14 @@ public class PackageController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PackageResponse> findPackage(@PathVariable long id) {
+    public ResponseEntity<PackageResponse> findPackage(@PathVariable String id) {
         Optional<PackageResponse> packageResponse = packageService.findPackage(id);
         return packageResponse.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @GetMapping("/{id}/history")
-    public ResponseEntity<List<PackageHistoryResponse>> getPackageHistory(@PathVariable long id) {
+    public ResponseEntity<List<PackageHistoryResponse>> getPackageHistory(@PathVariable String id) {
         List<PackageHistoryResponse> history = packageService.getPackageHistory(id);
         return ResponseEntity.ok(history);
     }
@@ -62,7 +62,7 @@ public class PackageController {
 
     @PatchMapping("/{id}/status")
     public ResponseEntity<PackageResponse> updatePackageStatus(
-            @PathVariable long id,
+            @PathVariable String id,
             @RequestParam PackageStatus status,
             @RequestParam String newLocation) {
         return ResponseEntity.ok(packageService.updatePackageStatus(id, status, newLocation));

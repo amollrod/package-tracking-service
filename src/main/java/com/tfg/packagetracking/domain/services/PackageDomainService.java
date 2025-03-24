@@ -27,11 +27,11 @@ public class PackageDomainService {
         this.blockchainService = blockchainServicePort;
     }
 
-    public Optional<Package> getPackageById(long id) {
+    public Optional<Package> getPackageById(String id) {
         return repository.findById(id);
     }
 
-    public List<PackageHistoryEvent> getPackageHistory(long id) {
+    public List<PackageHistoryEvent> getPackageHistory(String id) {
         if (repository.findById(id).isEmpty()) {
             throw new PackageNotFoundException(id);
         }
@@ -51,7 +51,7 @@ public class PackageDomainService {
         return newPackage;
     }
 
-    public Package updatePackageStatus(long id, PackageStatus status, String newLocation) {
+    public Package updatePackageStatus(String id, PackageStatus status, String newLocation) {
         Package updatedPackage = repository.findById(id)
                 .orElseThrow(() -> new PackageNotFoundException(id))
                 .updateStatus(status, newLocation);
