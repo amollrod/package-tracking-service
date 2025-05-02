@@ -19,6 +19,7 @@ import java.util.Optional;
 @Builder
 @Document(collection = "packages")
 public class Package {
+    // TODO: generate document classes in the infrastructure layer instead of using persistence annotations here
     @Id
     private String id;
     private String origin;

@@ -21,7 +21,7 @@ public class PackageEventKafkaAdapter implements PackageEventPublisherPort {
      * @param packageEntity The package entity to publish.
      */
     private void publishEvent(String topic, Package packageEntity) {
-        kafkaTemplate.send(topic, PackageMapper.toResponse(packageEntity));
+        kafkaTemplate.send(topic, packageEntity.getId(), PackageMapper.toResponse(packageEntity));
     }
 
     @Override

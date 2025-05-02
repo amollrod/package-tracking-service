@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.Instant;
@@ -25,11 +26,13 @@ public class PackageController {
         this.packageService = packageService;
     }
 
+    @PreAuthorize("hasAuthority('CREATE_PACKAGE')")
     @PostMapping
     public ResponseEntity<PackageResponse> createPackage(@RequestBody @Valid CreatePackageRequest request) {
         return ResponseEntity.ok(packageService.createPackage(request));
     }
 
+    @PreAuthorize("hasAuthority('FIND_PACKAGE')")
     @GetMapping("/{id}")
     public ResponseEntity<PackageResponse> findPackage(@PathVariable String id) {
         Optional<PackageResponse> packageResponse = packageService.findPackage(id);
@@ -37,12 +40,14 @@ public class PackageController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
+    @PreAuthorize("hasAuthority('VIEW_HISTORY')")
     @GetMapping("/{id}/history")
     public ResponseEntity<List<PackageHistoryResponse>> getPackageHistory(@PathVariable String id) {
         List<PackageHistoryResponse> history = packageService.getPackageHistory(id);
         return ResponseEntity.ok(history);
     }
 
+    @PreAuthorize("hasAuthority('SEARCH_PACKAGES')")
     @GetMapping("/search")
     public ResponseEntity<Page<PackageResponse>> searchPackages(
             @RequestParam(required = false) PackageStatus status,
@@ -60,6 +65,7 @@ public class PackageController {
         return ControllerUtils.createPagedResponse(packages);
     }
 
+    @PreAuthorize("hasAuthority('UPDATE_STATUS')")
     @PatchMapping("/{id}/status")
     public ResponseEntity<PackageResponse> updatePackageStatus(
             @PathVariable String id,
