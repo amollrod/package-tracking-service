@@ -12,6 +12,22 @@ services:
     networks:
       - package-tracking-network
 
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo_express
+    restart: always
+    ports:
+      - "8091:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+    depends_on:
+      - mongo
+    networks:
+      - package-tracking-network
+
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
@@ -55,19 +71,36 @@ services:
     networks:
       - package-tracking-network
 
-  mongo-express:
-    image: mongo-express:latest
-    container_name: mongo_express
+  auth-service:
+    image: ghcr.io/amollrod/auth-service:latest
+    container_name: auth_service
     restart: always
     ports:
-      - "8091:8081"
+      - "8082:8082"
     environment:
-      ME_CONFIG_MONGODB_SERVER: mongo
-      ME_CONFIG_MONGODB_PORT: 27017
-      ME_CONFIG_BASICAUTH_USERNAME: admin
-      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      - MONGODB_URI=mongodb://mongo:27017/auth
     depends_on:
       - mongo
+    networks:
+      - package-tracking-network
+
+  blockchain-service:
+    image: ghcr.io/amollrod/blockchain-api:latest
+    container_name: blockchain_service
+    restart: always
+    ports:
+      - "3000:3000"
+    networks:
+      - package-tracking-network
+
+  parceltrust-front:
+    image: ghcr.io/amollrod/parceltrust-front:latest
+    container_name: parceltrust_front
+    restart: always
+    ports:
+      - "5173:80"
+    depends_on:
+      - auth-service
     networks:
       - package-tracking-network
 
