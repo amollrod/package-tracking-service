@@ -78,7 +78,7 @@ services:
     ports:
       - "8082:8082"
     environment:
-      - MONGODB_URI=mongodb://mongo:27017/auth
+      - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - mongo
     networks:
@@ -91,14 +91,12 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - MONGODB_URI=mongodb://mongo:27017/package_tracking
-      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
-      - BLOCKCHAIN_SERVICE_URL=http://blockchain-service:3000
-      - AUTH_ISSUER_URI=http://localhost:8082
+      - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - mongo
       - kafka
       - auth-service
+      - blockchain-service
     networks:
       - package-tracking-network
 
