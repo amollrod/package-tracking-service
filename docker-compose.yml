@@ -81,6 +81,9 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - mongo
+    extra_hosts:
+      - "auth.localtest.me:host-gateway"
+      - "parceltrust.localtest.me:host-gateway"
     networks:
       - package-tracking-network
 
@@ -97,6 +100,24 @@ services:
       - kafka
       - auth-service
       - blockchain-service
+    extra_hosts:
+      - "auth.localtest.me:host-gateway"
+    networks:
+      - package-tracking-network
+
+  notification-service:
+    image: ghcr.io/amollrod/notification-service:latest
+    container_name: notification_service
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - kafka
+      - blockchain-service
+    extra_hosts:
+      - "blockchain.localtest.me:host-gateway"
     networks:
       - package-tracking-network
 
@@ -106,6 +127,8 @@ services:
     restart: always
     ports:
       - "3000:3000"
+    extra_hosts:
+      - "blockchain.localtest.me:host-gateway"
     networks:
       - package-tracking-network
 
@@ -117,6 +140,9 @@ services:
       - "5173:80"
     depends_on:
       - auth-service
+    extra_hosts:
+      - "auth.localtest.me:host-gateway"
+      - "parceltrust.localtest.me:host-gateway"
     networks:
       - package-tracking-network
 
