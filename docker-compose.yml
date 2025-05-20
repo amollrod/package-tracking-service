@@ -84,6 +84,24 @@ services:
     networks:
       - package-tracking-network
 
+  package-tracking-service:
+    image: ghcr.io/amollrod/package-tracking-service:latest
+    container_name: package_tracking_service
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/package_tracking
+      - KAFKA_BOOTSTRAP_SERVERS=kafka:9092
+      - BLOCKCHAIN_SERVICE_URL=http://blockchain-service:3000
+      - AUTH_ISSUER_URI=http://localhost:8082
+    depends_on:
+      - mongo
+      - kafka
+      - auth-service
+    networks:
+      - package-tracking-network
+
   blockchain-service:
     image: ghcr.io/amollrod/blockchain-api:latest
     container_name: blockchain_service
