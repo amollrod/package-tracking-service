@@ -97,6 +97,8 @@ services:
       - kafka
       - auth-service
       - blockchain-service
+    extra_hosts:
+      - "localhost:host-gateway"
     networks:
       - package-tracking-network
 
