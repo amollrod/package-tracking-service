@@ -82,8 +82,7 @@ services:
     depends_on:
       - mongo
     extra_hosts:
-      - "auth.localtest.me:host-gateway"
-      - "parceltrust.localtest.me:host-gateway"
+      - "host.docker.internal:host-gateway"
     networks:
       - package-tracking-network
 
@@ -101,7 +100,7 @@ services:
       - auth-service
       - blockchain-service
     extra_hosts:
-      - "auth.localtest.me:host-gateway"
+      - "host.docker.internal:host-gateway"
     networks:
       - package-tracking-network
 
@@ -117,7 +116,7 @@ services:
       - kafka
       - blockchain-service
     extra_hosts:
-      - "blockchain.localtest.me:host-gateway"
+      - "host.docker.internal:host-gateway"
     networks:
       - package-tracking-network
 
@@ -128,7 +127,7 @@ services:
     ports:
       - "3000:3000"
     extra_hosts:
-      - "blockchain.localtest.me:host-gateway"
+      - "host.docker.internal:host-gateway"
     networks:
       - package-tracking-network
 
@@ -141,8 +140,7 @@ services:
     depends_on:
       - auth-service
     extra_hosts:
-      - "auth.localtest.me:host-gateway"
-      - "parceltrust.localtest.me:host-gateway"
+      - "host.docker.internal:host-gateway"
     networks:
       - package-tracking-network
 
