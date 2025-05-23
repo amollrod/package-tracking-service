@@ -1,5 +1,6 @@
 [
   {
+    "_id": "67e1a4b3352a555ce8dc8d96",
     "origin": "Barcelona",
     "destination": "Ferrol",
     "status": "LOST",
@@ -12,6 +13,7 @@
     ]
   },
   {
+    "_id": "68166043511cd56f24f523ff",
     "origin": "Barcelona",
     "destination": "Madrid",
     "status": "DELIVERED",
@@ -24,6 +26,7 @@
     ]
   },
   {
+    "_id": "68166b16511cd56f24f52400",
     "origin": "Sevilla",
     "destination": "Valencia",
     "status": "CANCELED",
@@ -33,6 +36,7 @@
     ]
   },
   {
+    "_id": "68166b60511cd56f24f52401",
     "origin": "Leon",
     "destination": "Valladolid",
     "status": "IN_TRANSIT",
@@ -50,6 +54,7 @@
     ]
   },
   {
+    "_id": "682b9511040d9373443bef75",
     "origin": "Menorca",
     "destination": "Valls",
     "status": "CREATED",
