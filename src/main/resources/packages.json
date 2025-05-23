@@ -1,0 +1,60 @@
+[
+  {
+    "origin": "Barcelona",
+    "destination": "Ferrol",
+    "status": "LOST",
+    "history": [
+      { "status": "CREATED", "location": "Barcelona", "timestamp": 1742841011 },
+      { "status": "IN_TRANSIT", "location": "Zaragoza", "timestamp": 1742841191 },
+      { "status": "IN_TRANSIT", "location": "Madrid", "timestamp": 1742841198 },
+      { "status": "LOST", "location": "Pontevedra", "timestamp": 1742842048 },
+      { "status": "LOST", "location": "Pontevedra", "timestamp": 1747151585 }
+    ]
+  },
+  {
+    "origin": "Barcelona",
+    "destination": "Madrid",
+    "status": "DELIVERED",
+    "history": [
+      { "status": "CREATED", "location": "Barcelona", "timestamp": 1746296899 },
+      { "status": "IN_TRANSIT", "location": "Zaragoza", "timestamp": 1746297899 },
+      { "status": "IN_STORE", "location": "Pamplona", "timestamp": 1746298761 },
+      { "status": "IN_STORE", "location": "Madrid", "timestamp": 1746302577 },
+      { "status": "DELIVERED", "location": "Madrid", "timestamp": 1746302630 }
+    ]
+  },
+  {
+    "origin": "Sevilla",
+    "destination": "Valencia",
+    "status": "CANCELED",
+    "history": [
+      { "status": "CREATED", "location": "Sevilla", "timestamp": 1746299670 },
+      { "status": "CANCELED", "location": "Sevilla", "timestamp": 1746299708 }
+    ]
+  },
+  {
+    "origin": "Leon",
+    "destination": "Valladolid",
+    "status": "IN_TRANSIT",
+    "history": [
+      { "status": "CREATED", "location": "Leon", "timestamp": 1746299744 },
+      { "status": "IN_TRANSIT", "location": "Madrid", "timestamp": 1746299768 },
+      { "status": "IN_TRANSIT", "location": "Málaga", "timestamp": 1746300764 },
+      { "status": "IN_TRANSIT", "location": "Zamora", "timestamp": 1746301095 },
+      { "status": "IN_TRANSIT", "location": "Tarragona", "timestamp": 1746301166 },
+      { "status": "IN_TRANSIT", "location": "Gerona", "timestamp": 1746301664 },
+      { "status": "IN_TRANSIT", "location": "Ripoll", "timestamp": 1746302298 },
+      { "status": "DELIVERED", "location": "Valladolid", "timestamp": 1746302468 },
+      { "status": "IN_TRANSIT", "location": "Guadalajara", "timestamp": 1747151811 },
+      { "status": "IN_TRANSIT", "location": "Andorra", "timestamp": 1747861073 }
+    ]
+  },
+  {
+    "origin": "Menorca",
+    "destination": "Valls",
+    "status": "CREATED",
+    "history": [
+      { "status": "CREATED", "location": "Menorca", "timestamp": 1747686673 }
+    ]
+  }
+]
