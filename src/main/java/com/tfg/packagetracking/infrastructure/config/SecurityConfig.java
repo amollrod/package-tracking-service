@@ -18,8 +18,13 @@ import java.util.List;
 @EnableMethodSecurity
 public class SecurityConfig {
 
-    @Value("${cors.allowed-origins}")
-    private String allowedOrigins;
+    private final String allowedOrigins;
+
+    public SecurityConfig(
+        @Value("${cors.allowed-origins}") String allowedOrigins
+    ) {
+        this.allowedOrigins = allowedOrigins;
+    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {

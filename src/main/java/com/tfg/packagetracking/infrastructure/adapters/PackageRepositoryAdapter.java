@@ -3,6 +3,7 @@ package com.tfg.packagetracking.infrastructure.adapters;
 import com.tfg.packagetracking.domain.ports.PackageRepositoryPort;
 import com.tfg.packagetracking.domain.models.Package;
 import com.tfg.packagetracking.domain.models.PackageStatus;
+import com.tfg.packagetracking.infrastructure.mappers.PackageDocumentMapper;
 import com.tfg.packagetracking.infrastructure.repositories.MongoPackageRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,7 +28,7 @@ public class PackageRepositoryAdapter implements PackageRepositoryPort {
 
     @Override
     public Optional<Package> findById(String id) {
-        return repository.findById(id);
+        return repository.findById(id).map(PackageDocumentMapper::toDomain);
     }
 
     @Override
@@ -60,6 +61,6 @@ public class PackageRepositoryAdapter implements PackageRepositoryPort {
 
     @Override
     public void save(Package pkg) {
-        repository.save(pkg);
+        repository.save(PackageDocumentMapper.toDocument(pkg));
     }
 }

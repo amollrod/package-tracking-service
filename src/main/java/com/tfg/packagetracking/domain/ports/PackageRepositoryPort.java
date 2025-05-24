@@ -10,6 +10,14 @@ import java.util.Optional;
 
 public interface PackageRepositoryPort {
     Optional<Package> findById(String id);
-    Page<Package> findByFilters(PackageStatus status, String origin, String destination, String location, Instant fromDate, Instant toDate, Pageable pageable);
+    Page<Package> findByFilters(
+            PackageStatus status,
+            String origin,
+            String destination,
+            String location,
+            Instant fromDate,
+            Instant toDate,
+            Pageable pageable
+    );
     void save(Package pkg);
 }

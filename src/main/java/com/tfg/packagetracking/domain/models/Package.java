@@ -5,8 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -17,10 +15,7 @@ import java.util.Optional;
 @NoArgsConstructor
 @Getter
 @Builder
-@Document(collection = "packages")
 public class Package {
-    // TODO: generate document classes in the infrastructure layer instead of using persistence annotations here
-    @Id
     private String id;
     private String origin;
     private String destination;

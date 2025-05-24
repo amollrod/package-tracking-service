@@ -2,7 +2,7 @@ package com.tfg.packagetracking.infrastructure.config;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tfg.packagetracking.domain.models.Package;
+import com.tfg.packagetracking.infrastructure.documents.PackageDocument;
 import com.tfg.packagetracking.infrastructure.repositories.MongoPackageRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -31,7 +31,7 @@ public class DataSeeder {
         if (packageRepository.count() == 0) {
             try {
                 InputStream inputStream = new ClassPathResource("packages.json").getInputStream();
-                List<Package> packages = objectMapper.readValue(inputStream, new TypeReference<>() {});
+                List<PackageDocument> packages = objectMapper.readValue(inputStream, new TypeReference<>() {});
                 packageRepository.saveAll(packages);
                 log.info("Se cargaron los paquetes iniciales.");
             } catch (Exception e) {

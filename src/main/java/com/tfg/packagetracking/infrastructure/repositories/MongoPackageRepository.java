@@ -1,6 +1,6 @@
 package com.tfg.packagetracking.infrastructure.repositories;
 
-import com.tfg.packagetracking.domain.models.Package;
+import com.tfg.packagetracking.infrastructure.documents.PackageDocument;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
-public interface MongoPackageRepository extends MongoRepository<Package, String> { }
+public interface MongoPackageRepository extends MongoRepository<PackageDocument, String> { }
