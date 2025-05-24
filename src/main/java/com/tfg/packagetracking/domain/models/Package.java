@@ -35,13 +35,13 @@ public class Package {
      */
     public static Package create(String origin, String destination) {
         PackageStatus initialStatus = PackageStatus.CREATED;
-        List<PackageHistoryEvent> initialHistory = List.of(
+        List<PackageHistoryEvent> initialHistory = new ArrayList<>(List.of(
                 PackageHistoryEvent.builder()
                         .status(initialStatus.name())
                         .location(origin)
                         .timestamp(TimeUtils.getCurrentTimestamp())
                         .build()
-        );
+        ));
         return Package.builder()
                 .origin(origin)
                 .destination(destination)
