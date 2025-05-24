@@ -48,11 +48,16 @@ public class PackageRepositoryAdapter implements PackageRepositoryPort {
         if (location != null) {
             query.addCriteria(Criteria.where("history.location").regex(location, "i"));
         }
-        if (fromDate != null) {
-            query.addCriteria(Criteria.where("history.timestamp").gte(fromDate));
-        }
-        if (toDate != null) {
-            query.addCriteria(Criteria.where("history.timestamp").lte(toDate));
+
+        if (fromDate != null || toDate != null) {
+            Criteria timeCriteria = Criteria.where("history.timestamp");
+            if (fromDate != null) {
+                timeCriteria = timeCriteria.gte(fromDate);
+            }
+            if (toDate != null) {
+                timeCriteria = timeCriteria.lte(toDate);
+            }
+            query.addCriteria(timeCriteria);
         }
 
         query.with(pageable);
