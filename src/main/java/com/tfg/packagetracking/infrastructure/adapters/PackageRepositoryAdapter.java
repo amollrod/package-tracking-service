@@ -3,6 +3,7 @@ package com.tfg.packagetracking.infrastructure.adapters;
 import com.tfg.packagetracking.domain.ports.PackageRepositoryPort;
 import com.tfg.packagetracking.domain.models.Package;
 import com.tfg.packagetracking.domain.models.PackageStatus;
+import com.tfg.packagetracking.infrastructure.documents.PackageDocument;
 import com.tfg.packagetracking.infrastructure.mappers.PackageDocumentMapper;
 import com.tfg.packagetracking.infrastructure.repositories.MongoPackageRepository;
 import org.springframework.data.domain.Page;
@@ -55,8 +56,15 @@ public class PackageRepositoryAdapter implements PackageRepositoryPort {
         }
 
         query.with(pageable);
-        long count = mongoTemplate.count(query, Package.class);
-        return PageableExecutionUtils.getPage(mongoTemplate.find(query, Package.class), pageable, () -> count);
+        long count = mongoTemplate.count(query, PackageDocument.class);
+        return PageableExecutionUtils.getPage(
+                mongoTemplate.find(query, PackageDocument.class)
+                        .stream()
+                        .map(PackageDocumentMapper::toDomain)
+                        .toList(),
+                pageable,
+                () -> count
+        );
     }
 
     @Override
