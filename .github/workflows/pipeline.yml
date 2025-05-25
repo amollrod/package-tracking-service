@@ -2,22 +2,26 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
+    name: Build
     uses: ./.github/workflows/build.yml
 
   unit-tests:
+    name: Unit Tests
     needs: build
     uses: ./.github/workflows/unit-tests.yml
 
   integration-tests:
+    name: Integration Tests
     needs: build
     uses: ./.github/workflows/integration-tests.yml
 
   docker-publish:
+    name: Publish Docker image
     needs: [unit-tests, integration-tests]
     uses: ./.github/workflows/docker-publish.yml
-    secrets: inherit
