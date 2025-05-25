@@ -66,6 +66,22 @@ class PackageControllerTest {
     }
 
     @Test
+    @WithMockUser(authorities = "CREATE_PACKAGE")
+    void shouldReturnBadRequestForInvalidPackageCreation() throws Exception {
+        CreatePackageRequest request = CreatePackageRequest.builder()
+                .origin("Madrid")
+                .destination("") // Invalid destination
+                .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/packages")
+                        .with(csrf())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(request)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.destination").value("Destination must not be blank"));
+    }
+
+    @Test
     @WithMockUser(authorities = "FIND_PACKAGE")
     void shouldReturnPackageById() throws Exception {
         PackageResponse response = PackageResponse.builder()

@@ -11,8 +11,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public class CreatePackageRequest {
-    @NotBlank
+    @NotBlank(message = "Origin must not be blank")
     private String origin;
-    @NotBlank
+    @NotBlank(message = "Destination must not be blank")
     private String destination;
 }
