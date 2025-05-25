@@ -1,0 +1,26 @@
+name: Unit Tests
+
+on:
+  workflow_call:
+
+jobs:
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: 17
+
+      - name: Restore Maven cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: m2-
+
+      - name: Run unit & architecture tests
+        run: mvn test

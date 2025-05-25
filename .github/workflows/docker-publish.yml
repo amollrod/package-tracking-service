@@ -1,12 +1,11 @@
-name: Build and Publish Package Tracking Image
+name: Docker Publish
 
 on:
-  push:
-    branches:
-      - master
+  workflow_call:
+    secrets: {}
 
 jobs:
-  build-and-push:
+  docker:
     runs-on: ubuntu-latest
 
     permissions:
@@ -14,15 +13,20 @@ jobs:
       packages: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: app-jar
+          path: target
 
       - name: Build Docker image
         run: |
