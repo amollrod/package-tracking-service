@@ -140,7 +140,6 @@
 					</includes>
 					<excludes>
 						<exclude>**/*IT.java</exclude>
-						<exclude>**/ArchitectureTest.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
@@ -164,7 +163,6 @@
 					</includes>
 					<excludes>
 						<exclude>**/*Test.java</exclude>
-						<exclude>**/ArchitectureTest.java</exclude>
 					</excludes>
 				</configuration>
 			</plugin>
