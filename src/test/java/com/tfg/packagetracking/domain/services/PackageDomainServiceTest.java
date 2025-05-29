@@ -93,23 +93,30 @@ class PackageDomainServiceTest {
 
     @Test
     void shouldCreatePackageAndPublishEvent() {
+        Package pkg = Package.create("Sevilla", "Bilbao");
+        when(repository.save(any(Package.class))).thenReturn(pkg);
+
         Package created = service.createPackage("Sevilla", "Bilbao");
 
         verify(repository).save(any(Package.class));
         verify(eventPublisher).publishPackageCreatedEvent(created);
         assertThat(created.getOrigin()).isEqualTo("Sevilla");
+        assertThat(created.getDestination()).isEqualTo("Bilbao");
     }
 
     @Test
     void shouldUpdatePackageStatusAndPublishEvent() {
         Package existing = Package.create("X", "Y");
         when(repository.findById("id")).thenReturn(Optional.of(existing));
+        when(repository.save(any(Package.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         Package updated = service.updatePackageStatus("id", PackageStatus.IN_TRANSIT, "Zaragoza");
 
         verify(repository).save(updated);
         verify(eventPublisher).publishPackageUpdatedEvent(updated);
         assertThat(updated.getStatus()).isEqualTo(PackageStatus.IN_TRANSIT);
+        PackageHistoryEvent lastEvent = updated.getHistory().get(updated.getHistory().size() - 1);
+        assertThat(lastEvent.getLocation()).isEqualTo("Zaragoza");
     }
 
     @Test
