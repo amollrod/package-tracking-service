@@ -73,7 +73,7 @@ public class PackageRepositoryAdapter implements PackageRepositoryPort {
     }
 
     @Override
-    public void save(Package pkg) {
-        repository.save(PackageDocumentMapper.toDocument(pkg));
+    public Package save(Package pkg) {
+        return PackageDocumentMapper.toDomain(repository.save(PackageDocumentMapper.toDocument(pkg)));
     }
 }

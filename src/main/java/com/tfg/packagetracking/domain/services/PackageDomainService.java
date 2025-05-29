@@ -43,10 +43,10 @@ public class PackageDomainService {
     public Package createPackage(String origin, String destination) {
         Package newPackage = Package.create(origin, destination);
 
-        repository.save(newPackage);
-        eventPublisher.publishPackageCreatedEvent(newPackage);
+        Package savedPackage = repository.save(newPackage);
+        eventPublisher.publishPackageCreatedEvent(savedPackage);
 
-        return newPackage;
+        return savedPackage;
     }
 
     public Package updatePackageStatus(String id, PackageStatus status, String newLocation) {
@@ -54,9 +54,9 @@ public class PackageDomainService {
                 .orElseThrow(() -> new PackageNotFoundException(id))
                 .updateStatus(status, newLocation);
 
-        repository.save(updatedPackage);
-        eventPublisher.publishPackageUpdatedEvent(updatedPackage);
+        Package savedPackage = repository.save(updatedPackage);
+        eventPublisher.publishPackageUpdatedEvent(savedPackage);
 
-        return updatedPackage;
+        return savedPackage;
     }
 }

@@ -19,5 +19,5 @@ public interface PackageRepositoryPort {
             Instant toDate,
             Pageable pageable
     );
-    void save(Package pkg);
+    Package save(Package pkg);
 }
