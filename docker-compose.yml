@@ -71,78 +71,78 @@ services:
     networks:
       - package-tracking-network
 
-#  auth-service:
-#    image: ghcr.io/amollrod/auth-service:latest
-#    container_name: auth_service
-#    restart: always
-#    ports:
-#      - "8082:8082"
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
-#    depends_on:
-#      - mongo
-#    extra_hosts:
-#      - "localhost:host-gateway"
-#    networks:
-#      - package-tracking-network
-#
-#  package-tracking-service:
-#    image: ghcr.io/amollrod/package-tracking-service:latest
-#    container_name: package_tracking_service
-#    restart: always
-#    ports:
-#      - "8080:8080"
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
-#    depends_on:
-#      - mongo
-#      - kafka
-#      - auth-service
-#      - blockchain-service
-#    extra_hosts:
-#      - "localhost:host-gateway"
-#    networks:
-#      - package-tracking-network
-#
-#  notification-service:
-#    image: ghcr.io/amollrod/notification-service:latest
-#    container_name: notification_service
-#    restart: always
-#    ports:
-#      - "8081:8081"
-#    environment:
-#      - SPRING_PROFILES_ACTIVE=docker
-#    depends_on:
-#      - kafka
-#      - blockchain-service
-#    extra_hosts:
-#      - "localhost:host-gateway"
-#    networks:
-#      - package-tracking-network
-#
-#  blockchain-service:
-#    image: ghcr.io/amollrod/blockchain-api:latest
-#    container_name: blockchain_service
-#    restart: always
-#    ports:
-#      - "3000:3000"
-#    extra_hosts:
-#      - "localhost:host-gateway"
-#    networks:
-#      - package-tracking-network
-#
-#  parceltrust-front:
-#    image: ghcr.io/amollrod/parceltrust-front:latest
-#    container_name: parceltrust_front
-#    restart: always
-#    ports:
-#      - "5173:80"
-#    depends_on:
-#      - auth-service
-#    extra_hosts:
-#      - "localhost:host-gateway"
-#    networks:
-#      - package-tracking-network
+  auth-service:
+    image: ghcr.io/amollrod/auth-service:latest
+    container_name: auth_service
+    restart: always
+    ports:
+      - "8082:8082"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+    extra_hosts:
+      - "localhost:host-gateway"
+    networks:
+      - package-tracking-network
+
+  package-tracking-service:
+    image: ghcr.io/amollrod/package-tracking-service:latest
+    container_name: package_tracking_service
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - mongo
+      - kafka
+      - auth-service
+      - blockchain-service
+    extra_hosts:
+      - "localhost:host-gateway"
+    networks:
+      - package-tracking-network
+
+  notification-service:
+    image: ghcr.io/amollrod/notification-service:latest
+    container_name: notification_service
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - kafka
+      - blockchain-service
+    extra_hosts:
+      - "localhost:host-gateway"
+    networks:
+      - package-tracking-network
+
+  blockchain-service:
+    image: ghcr.io/amollrod/blockchain-api:latest
+    container_name: blockchain_service
+    restart: always
+    ports:
+      - "3000:3000"
+    extra_hosts:
+      - "localhost:host-gateway"
+    networks:
+      - package-tracking-network
+
+  parceltrust-front:
+    image: ghcr.io/amollrod/parceltrust-front:latest
+    container_name: parceltrust_front
+    restart: always
+    ports:
+      - "5173:80"
+    depends_on:
+      - auth-service
+    extra_hosts:
+      - "localhost:host-gateway"
+    networks:
+      - package-tracking-network
 
 volumes:
   mongo_data:
