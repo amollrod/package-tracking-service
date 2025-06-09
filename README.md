@@ -302,4 +302,4 @@ El servicio expone el puerto `8080` y se comunica con otros microservicios usand
 
 ---
 
-Proyecto desarrollado como parte del TFG de **Alex Moll Rodríguez** para la **UOC (Universitat Oberta de Catalunya)** - 2025
+Proyecto desarrollado como parte del TFG de **Alex Moll Rodríguez** para la **UOC** en 2025
