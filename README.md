@@ -331,7 +331,7 @@ El servicio expone el puerto `8080` y se comunica con otros microservicios usand
 ## Licencias
 
 - Este repositorio está licenciado bajo los términos de la [GNU General Public License v3.0](./LICENSE)
-- La memoria del TFG está protegida bajo licencia doble: [CC BY-NC 3.0 España](https://creativecommons.org/licenses/by-nc/3.0/es/) + [GNU Free Documentation License 1.3](https://www.gnu.org/licenses/fdl-1.3.html)
+- La memoria del TFG está protegida bajo: [CC BY-NC 3.0 España](https://creativecommons.org/licenses/by-nc/3.0/es/) y [GNU Free Documentation License 1.3](https://www.gnu.org/licenses/fdl-1.3.html)
 
 
 Proyecto desarrollado como parte del TFG de **Alex Moll Rodríguez** para la **UOC** en 2025.
