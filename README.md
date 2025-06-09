@@ -3,6 +3,8 @@
 
 Este microservicio forma parte del sistema `ParcelTrust`, desarrollado como Trabajo de Fin de Grado. Su función principal es gestionar el ciclo de vida de paquetes postales, proporcionando trazabilidad transparente, verificable y segura a través de una arquitectura distribuida basada en microservicios, eventos Kafka y registro inmutable en blockchain (Ethereum Sepolia).
 
+![arquitecturaPTS.png](arquitecturaPTS.png)
+
 ---
 
 ## Tecnologías utilizadas
@@ -160,8 +162,8 @@ Estos claims permiten aplicar reglas finas de seguridad usando `@PreAuthorize`.
 
 ### Crear paquete
 
-```json
 POST /packages
+```json
 {
   "id": "PKG-12345",
   "origin": "Barcelona",
