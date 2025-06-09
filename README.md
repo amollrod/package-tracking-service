@@ -1,7 +1,7 @@
 # Package Tracking Service
 
 ![Build](https://github.com/amollrod/package-tracking-service/actions/workflows/pipeline.yml/badge.svg)
-![License: MIT](https://img.shields.io/badge/license-MIT-green.svg)
+![License: GPLv3](https://img.shields.io/badge/license-GPLv3-blue.svg)
 ![TFG Document License: CC BY-NC 3.0 + GNU FDL 1.3](https://img.shields.io/badge/TFG%20License-CC%20BY--NC%203.0%20%2B%20GNU%20FDL%201.3-blue)
 
 Este microservicio forma parte del sistema `ParcelTrust`, desarrollado como Trabajo de Fin de Grado. Su función principal es gestionar el ciclo de vida de paquetes postales, proporcionando trazabilidad transparente, verificable y segura a través de una arquitectura distribuida basada en microservicios, eventos Kafka y registro inmutable en blockchain (Ethereum Sepolia).
@@ -328,7 +328,10 @@ El servicio expone el puerto `8080` y se comunica con otros microservicios usand
 
 ---
 
+## Licencias
+
+- Este repositorio está licenciado bajo los términos de la [GNU General Public License v3.0](./LICENSE)
+- La memoria del TFG está protegida bajo licencia doble: [CC BY-NC 3.0 España](https://creativecommons.org/licenses/by-nc/3.0/es/) + [GNU Free Documentation License 1.3](https://www.gnu.org/licenses/fdl-1.3.html)
+
+
 Proyecto desarrollado como parte del TFG de **Alex Moll Rodríguez** para la **UOC** en 2025.
-
-
-Este proyecto está bajo la licencia [MIT](./LICENSE).
